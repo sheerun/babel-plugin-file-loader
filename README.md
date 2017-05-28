@@ -36,7 +36,7 @@ const image1 = 'http://your.cdn.address/assets/icon1.svg';
 // ajaxAsyncRequest(image)
 ```
 
-See the spec for more [examples](babel-plugin-transform-assets-import-to-string/blob/master/test/index.spec.js).
+See the spec for more [examples](https://github.com/yeojz/babel-plugin-transform-assets-import-to-string/blob/master/test/index.spec.js).
 
 ## Installation
 
