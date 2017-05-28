@@ -1,0 +1,13 @@
+machine:
+  node:
+    version: "6"
+general:
+  branches:
+    ignore:
+      - gh-pages
+test:
+  pre:
+    - npm run clean
+  override:
+    - npm run test
+    - npm run lint
