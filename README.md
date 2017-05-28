@@ -1,6 +1,7 @@
 # babel-plugin-transform-assets-import-to-string
 > Babel plugin that transforms image assets import and requires to urls / cdn
 
+[![npm][npm-badge]][npm-link]
 [![Build Status][circle-badge]][circle-link]
 
 ## Table of Contents
@@ -34,6 +35,8 @@ const image1 = 'http://your.cdn.address/assets/icon1.svg';
 // eg: Other cases
 // ajaxAsyncRequest(image)
 ```
+
+See the spec for more [examples](babel-plugin-transform-assets-import-to-string/blob/master/test/index.spec.js).
 
 ## Installation
 
@@ -85,4 +88,5 @@ __Note:__ leading `.` (dot) is required.
 [circle-badge]: https://img.shields.io/circleci/project/github/yeojz/babel-plugin-transform-assets-import-to-string/master.svg?style=flat-square
 [circle-link]: https://circleci.com/gh/yeojz/babel-plugin-transform-assets-import-to-string
 
-
+[npm-badge]: https://img.shields.io/npm/v/babel-plugin-transform-assets-import-to-string.svg?style=flat-square
+[npm-link]: https://www.npmjs.com/package/babel-plugin-transform-assets-import-to-string
