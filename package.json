@@ -49,7 +49,7 @@
     "cross-env": "^5.0.0",
     "eslint": "^3.19.0",
     "mocha": "^3.4.2",
-    "nyc": "^10.3.2",
+    "nyc": "^11.0.2",
     "rimraf": "^2.6.1"
   },
   "dependencies": {}
