@@ -41,7 +41,7 @@
   "homepage": "https://github.com/yeojz/babel-plugin-transform-assets-import-to-string#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^8.0.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.24.1",
     "chai": "^4.0.0",
