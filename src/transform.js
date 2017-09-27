@@ -1,5 +1,5 @@
 import crypto from 'crypto'
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 
 function getHash(str) {
@@ -10,18 +10,19 @@ function getHash(str) {
     .slice(0, 8);
 }
 
-function getFile(absPath, baseDir, uri) {
-  const file = absPath
-    .split(baseDir || path.sep)
-    .pop();
+function getFile(state, absPath, opts) {
+  const root = state.file.opts.sourceRoot || process.cwd();
+  let file = absPath.replace(root, '');
 
-  if (!baseDir) {
-    return (uri) ? '/' + file : file;
+  if (opts.baseDir) {
+    file = path.join(opts.baseDir, file);
+    fs.copySync(absPath, path.join(root, file))
   }
 
-  return path.join(baseDir, file)
+  return '/' + file
     .replace(/\\/g, '/')
-    .replace(/\/\/g/, '/');
+    .replace(/\/{2,}/g, '/')
+    .replace(/^\/+/g, '');
 }
 
 const getVariableName = (p) => {
@@ -34,8 +35,8 @@ const getVariableName = (p) => {
   }
 }
 
-export default (p, t, opts, absPath, calleeName) => {
-  const file = getFile(absPath, opts.baseDir, opts.baseUri);
+export default (p, t, state, opts, absPath, calleeName) => {
+  const file = getFile(state, absPath, opts);
   let hash = '';
 
   if (opts.hash === 1) {

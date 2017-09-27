@@ -1,5 +1,7 @@
-# babel-plugin-transform-assets-import-to-string
-> Babel plugin that transforms image assets import and requires to urls / cdn
+# babel-plugin-import-static-files
+Transforms static files import and copy files to /static folder for next.js applications. 
+This plugin is based on [babel-plugin-transform-assets-import-to-string](https://github.com/yeojz/babel-plugin-transform-assets-import-to-string), I just added copy functionality. 
+Original plugin's functionality is still working.
 
 [![npm][npm-badge]][npm-link]
 [![Build Status][circle-badge]][circle-link]
@@ -19,13 +21,14 @@ This [babel](https://babeljs.io/) plugin allows you to transform asset files int
 This helps when doing _isomorphic_ / server-rendered applications.
 
 ```js
-import image from '../path/assets/icon.svg';
-const image1 = require('../path/assets/icon1.svg');
+import image from './path/to/icon.png';
+const image1 = require('./path/to/icon.svg');
 
-// to
+// icon.png and icon.svg will be copied to project's root under static folder
+// and code will be transformed to:
 
-const image = 'http://your.cdn.address/assets/icon.svg';
-const image1 = 'http://your.cdn.address/assets/icon1.svg';
+const image = '/static/path/to/icon.png';
+const image1 = '/static/path/to/icon.svg';
 
 // Somewhere further down in your code:
 //
@@ -36,12 +39,12 @@ const image1 = 'http://your.cdn.address/assets/icon1.svg';
 // ajaxAsyncRequest(image)
 ```
 
-See the spec for more [examples](https://github.com/yeojz/babel-plugin-transform-assets-import-to-string/blob/master/test/index.spec.js).
+See the spec for more [examples](https://github.com/ahalimkara/babel-plugin-import-static-files/blob/master/test/index.spec.js).
 
 ## Installation
 
 ```
-$> npm install babel-plugin-transform-assets-import-to-string --save
+$> npm install babel-plugin-import-static-files --save
 ```
 
 ## Usage
@@ -49,10 +52,18 @@ $> npm install babel-plugin-transform-assets-import-to-string --save
 ### via .babelrc
 ```json
 {
-  "plugins": [["transform-assets-import-to-string", {
-    "baseDir": "/assets",
-    "baseUri": "http://your.cdn.address"
-  }]]
+  "plugins": [
+    "transform-assets-import-to-string",
+    
+    // or if you will use cdn
+    [
+      "transform-assets-import-to-string", 
+      {
+        "baseDir": "/static",
+        "baseUri": "http://your.cdn.address"
+      }
+    ]
+  ]
 }
 ```
 
@@ -60,10 +71,7 @@ $> npm install babel-plugin-transform-assets-import-to-string --save
 
 ```js
 require("babel-core").transform("code", {
-  plugins: [["transform-assets-import-to-string", {
-    "baseDir": "/assets",
-    "baseUri": "http://your.cdn.address"
-  }]]
+  plugins: ["transform-assets-import-to-string"]
 });
 ```
 
@@ -83,10 +91,10 @@ __Note:__ leading `.` (dot) is required.
 
 ## License
 
-`babel-plugin-transform-assets-import-to-string` is [MIT licensed](./LICENSE)
+`babel-plugin-import-static-files` is [MIT licensed](./LICENSE)
 
-[circle-badge]: https://img.shields.io/circleci/project/github/yeojz/babel-plugin-transform-assets-import-to-string/master.svg?style=flat-square
-[circle-link]: https://circleci.com/gh/yeojz/babel-plugin-transform-assets-import-to-string
+[circle-badge]: https://img.shields.io/circleci/project/github/ahalimkara/babel-plugin-import-static-files/master.svg?style=flat-square
+[circle-link]: https://circleci.com/gh/ahalimkara/babel-plugin-import-static-files
 
-[npm-badge]: https://img.shields.io/npm/v/babel-plugin-transform-assets-import-to-string.svg?style=flat-square
-[npm-link]: https://www.npmjs.com/package/babel-plugin-transform-assets-import-to-string
+[npm-badge]: https://img.shields.io/npm/v/babel-plugin-import-static-files.svg?style=flat-square
+[npm-link]: https://www.npmjs.com/package/babel-plugin-import-static-files

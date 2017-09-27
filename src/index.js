@@ -2,6 +2,7 @@ import {dirname, extname, resolve} from'path';
 import transform from './transform';
 
 export const defaultOptions = {
+  baseDir: '/static',
   extensions: [
     '.gif',
     '.jpeg',
@@ -19,7 +20,8 @@ const applyTransform = (p, t, state, value, calleeName) => {
   if (options.extensions && options.extensions.indexOf(ext) >= 0) {
     const dir = dirname(resolve(state.file.opts.filename));
     const absPath = resolve(dir, value);
-    transform(p, t, options, absPath, calleeName);
+
+    transform(p, t, state, options, absPath, calleeName);
   }
 }
 
