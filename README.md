@@ -52,7 +52,7 @@ $> npm install babel-plugin-import-static-files --save
 ### via .babelrc
 ```json
 {
-  "plugins": ["transform-assets-import-to-string"]
+  "plugins": ["import-static-files"]
 }
 ```
 or if you will use cdn
@@ -60,7 +60,7 @@ or if you will use cdn
 {
   "plugins": [
     [
-      "transform-assets-import-to-string", 
+      "import-static-files", 
       {
         "baseDir": "/static",
         "baseUri": "http://your.cdn.address"
@@ -74,7 +74,7 @@ or if you will use cdn
 
 ```js
 require("babel-core").transform("code", {
-  plugins: ["transform-assets-import-to-string"]
+  plugins: ["import-static-files"]
 });
 ```
 
@@ -85,7 +85,7 @@ __Note:__ leading `.` (dot) is required.
 ```json
 {
   "plugins": [
-    ["transform-assets-import-to-string", {
+    ["import-static-files", {
       "extensions": [".jpg", ".png"]
     }]
   ]
