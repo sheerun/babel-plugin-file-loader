@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-import-static-files",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Transforms static files import and copy files to /static folder for next.js applications.",
   "main": "lib/index.js",
   "scripts": {

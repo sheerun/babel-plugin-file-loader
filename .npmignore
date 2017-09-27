@@ -3,3 +3,10 @@ src
 coverage
 tests
 test
+.idea
+.babelrc
+.editorconfig
+.eslintrc.json
+.nycrc
+circle.yml
+yarn.lock
