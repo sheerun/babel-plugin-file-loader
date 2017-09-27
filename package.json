@@ -1,7 +1,7 @@
 {
-  "name": "babel-plugin-transform-assets-import-to-string",
-  "version": "1.0.1",
-  "description": "Babel plugin that transforms image assets import and requires to urls / cdn",
+  "name": "babel-plugin-import-static-files",
+  "version": "1.0.0",
+  "description": "Transforms static files import and copy files to /static folder for next.js applications.",
   "main": "lib/index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib",
@@ -15,30 +15,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yeojz/babel-plugin-transform-assets-import-to-string.git"
+    "url": "git+https://github.com/ahalimkara/babel-plugin-import-static-files.git"
   },
   "keywords": [
+    "nextjs",
     "babel",
     "import",
-    "assets",
-    "cdn",
+    "static",
     "images",
-    "isomorphic",
-    "server-side-rendering",
-    "babel-plugin",
-    "plugin",
-    "require",
-    "transform",
-    "string",
-    "universal",
-    "webpack"
+    "cdn",
+    "isomorphic"
   ],
-  "author": "Gerald Yeo <contact@fusedthought.com>",
+  "author": "Abdulhalim Kara <ahalimkara@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yeojz/babel-plugin-transform-assets-import-to-string/issues"
+    "url": "https://github.com/ahalimkara/babel-plugin-import-static-files/issues"
   },
-  "homepage": "https://github.com/yeojz/babel-plugin-transform-assets-import-to-string#readme",
+  "homepage": "https://github.com/ahalimkara/babel-plugin-import-static-files#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^8.0.0",

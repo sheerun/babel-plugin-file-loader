@@ -52,10 +52,13 @@ $> npm install babel-plugin-import-static-files --save
 ### via .babelrc
 ```json
 {
+  "plugins": ["transform-assets-import-to-string"]
+}
+```
+or if you will use cdn
+```json
+{
   "plugins": [
-    "transform-assets-import-to-string",
-    
-    // or if you will use cdn
     [
       "transform-assets-import-to-string", 
       {
