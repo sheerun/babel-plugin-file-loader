@@ -3,6 +3,8 @@ Transforms static files import and copy files to /static folder for next.js appl
 This plugin is based on [babel-plugin-transform-assets-import-to-string](https://github.com/yeojz/babel-plugin-transform-assets-import-to-string), I just added copy functionality. 
 Original plugin's functionality is still working.
 
+[![npm][npm-badge]][npm-link]
+
 ## Table of Contents
 
 -   [About](#about)
@@ -92,3 +94,6 @@ __Note:__ leading `.` (dot) is required.
 ## License
 
 `babel-plugin-import-static-files` is [MIT licensed](./LICENSE)
+
+[npm-badge]: https://img.shields.io/npm/v/babel-plugin-import-static-files.svg?style=flat-square
+[npm-link]: https://www.npmjs.com/package/babel-plugin-import-static-files
