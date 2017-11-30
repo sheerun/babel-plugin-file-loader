@@ -1,0 +1,11 @@
+{
+  "presets": ["react"],
+  "plugins": [
+    ["file-loader", {
+      "extensions": ["ico", "png"],
+      "publicPath": "/static",
+      "outputPath": "/dist/static",
+      "context": "/src"
+    }]
+  ]
+}
