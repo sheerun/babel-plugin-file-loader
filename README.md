@@ -1,8 +1,6 @@
-# babel-plugin-file-loader
+# babel-plugin-file-loader [![CircleCI](https://circleci.com/gh/sheerun/babel-plugin-file-loader/tree/master.svg?style=svg)](https://circleci.com/gh/sheerun/babel-plugin-file-loader/tree/master) [![npm][npm-badge]][npm-link]
 
 Works the same as Webpack's [file-loader](https://github.com/webpack-contrib/file-loader/), but on server side.
-
-[![npm][npm-badge]][npm-link]
 
 ## Installation
 
