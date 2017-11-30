@@ -1,7 +1,7 @@
 {
-  "name": "babel-plugin-import-static-files",
-  "version": "1.0.1",
-  "description": "Transforms static files import and copy files to /static folder for next.js applications.",
+  "name": "babel-plugin-file-loader",
+  "version": "1.0.0",
+  "description": "Like file-loader for webpack, but for Babel. Works with SSE apps.",
   "main": "lib/index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib",
@@ -15,23 +15,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ahalimkara/babel-plugin-import-static-files.git"
+    "url": "git+https://github.com/sheerun/babel-plugin-file-loader.git"
   },
   "keywords": [
     "nextjs",
     "babel",
     "import",
+    "loader",
     "static",
     "images",
     "cdn",
+    "sse",
     "isomorphic"
   ],
-  "author": "Abdulhalim Kara <ahalimkara@gmail.com>",
+  "author": "Adam Stankiewicz <sheerun@sher.pl>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ahalimkara/babel-plugin-import-static-files/issues"
+    "url": "https://github.com/sheerun/babel-plugin-file-loader/issues"
   },
-  "homepage": "https://github.com/ahalimkara/babel-plugin-import-static-files#readme",
+  "homepage": "https://github.com/sheerun/babel-plugin-file-loader#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^8.0.0",
@@ -43,9 +45,10 @@
     "eslint": "^4.1.0",
     "mocha": "^3.4.2",
     "nyc": "^11.0.2",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.2"
   },
   "dependencies": {
+    "big.js": "^5.0.3",
     "fs-extra": "^4.0.2"
   }
 }

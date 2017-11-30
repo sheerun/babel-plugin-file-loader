@@ -1,1 +1,1 @@
-import test from 'something';
+import test from 'something'

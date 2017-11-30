@@ -13,8 +13,5 @@
       "experimentalObjectRestSpread": true,
       "jsx": true
     }
-  },
-  "extends": [
-    "eslint:recommended"
-  ]
+  }
 }
