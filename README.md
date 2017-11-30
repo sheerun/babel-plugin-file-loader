@@ -91,9 +91,7 @@ The default is `[hash].[ext]` where:
 |**`[path]`**|`{String}`|`file.dirname`|The path of the resource relative to the `context`|
 |**`[hash]`**|`{String}`|`md5`|The hash of the content, see below for more info|
 
-#### [hash]
-
-The format is: `[<hashType>:hash:<digestType>:<length>]` where:
+The full format `[hash]` is: `[<hashType>:hash:<digestType>:<length>]`, where:
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
