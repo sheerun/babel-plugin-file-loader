@@ -41,23 +41,25 @@ This is equivalent to following default configuration:
 
 ## How it works
 
-Algorithms is as follows:
+More or less as follows:
 
-1. Select all imports and requires that end with one of `"extensions"`
-2. Calculate `$NAME` of resource by substituting `"name"`'s placeholders (`[path]` is calculated relative to `"context"`)
-3. Copy resource into `$ROOT/outputPath/$NAME` where `$ROOT` is `.babelrc` location.
-3. Replace import and require in code with `publicPath/$NAME` string
+1. Processes only `import` and `require` that reference files ending with one of `"extensions"`
+2. Calculates actual `$name` of resource by substituting placeholders in `"name"`
+3. Copies resource into `$ROOT/$outputPath/$name` where `$ROOT` is `.babelrc` location.
+3. Replaces `import` and `require` in code with `"$publicPath/$name"` string
 
-## Usage
+## Example usage
 
 ```js
 import img from './file.png'
+const img2 = require('./file.svg')
 ```
 
-Puts `0dcbbaa7013869e351f.png` in the `outputPath` and replaces code to:
+Puts `0dcbbaa7013869e351f.png` and `8d3fe267fe578005541.svg` in the `/public` and replaces code with:
 
 ```
 const img = "/public/0dcbbaa7013869e351f.png"
+const img2 = "/public/8d3fe267fe578005541.svg"
 ```
 
 ## Options
