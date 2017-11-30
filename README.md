@@ -8,7 +8,11 @@ Works the same as Webpack's [file-loader](https://github.com/webpack-contrib/fil
 npm install babel-plugin-file-loader --save
 ```
 
-and then put following "file-loader" as plugin in .babelrc:
+```
+yarn add babel-plugin-file-loader
+```
+
+Then put following "file-loader" as plugin in .babelrc:
 
 ```json
 {
@@ -39,10 +43,10 @@ This is equivalent to following default configuration:
 
 Algorithms is as follows:
 
-1. Select all improrts/requires that end with one of `extensions`
-2. Calculate `NAME` of resource by substituting `name` placeholders (`[path]` is calculated relative to `context`)
-3. Copy resource into `PROJECT_ROOT/outputPath/NAME`
-3. Replace import/require in code with `publicPath/NAME` string
+1. Select all imports and requires that end with one of `"extensions"`
+2. Calculate `$NAME` of resource by substituting `"name"`'s placeholders (`[path]` is calculated relative to `"context"`)
+3. Copy resource into `$ROOT/outputPath/$NAME` where `$ROOT` is `.babelrc` location.
+3. Replace import and require in code with `publicPath/$NAME` string
 
 ## Usage
 
@@ -50,53 +54,44 @@ Algorithms is as follows:
 import img from './file.png'
 ```
 
-Emits `file.png` as file in the output path and returns the public path.
+Puts `0dcbbaa7013869e351f.png` in the `outputPath` and replaces code to:
 
 ```
-"/public/0dcbbaa7013869e351f.png"
+const img = "/public/0dcbbaa7013869e351f.png"
 ```
 
+## Options
 
-By default the filename of the resulting file is the MD5 hash of the file's contents with the original extension of the required resource. You can change it by setting "name" parameter. You can use any of placeholders and hashes described further in the README:
+### outputPath
 
-```json
-{
-  "plugins": [
-    [
-      "file-loader",
-      {
-        "name": "[path][name].[ext]"
-      }
-    ]
-  ]
-}
+Tells where to put static files. By default it's `"/public"`.
+
+This path is relative to the root of project.
+
+### publicPath
+
+Tells what prefix to output in the source. By default it's `"/public"` as well but it can be even full url, like so: `"http://cdn.example.com/foobar/"`
+
+In this case the resulting code is:
+
+```
+const img = "http://cdn.example.com/foobar/0dcbbaa7013869e351f.png"
 ```
 
-By default, it will transform the following extensions: `.gif, .jpeg, .jpg, .png, .svg` if `extensions` option is not defined. To configure a custom list, just add the `extensions` array as an option.
+### name
 
-```json
-  "plugins": [
-    [
-      "file-loader",
-      {
-        "extensions": ["png", "jpg", "gif"]
-      }
-    ]
-  ]
-```
-
-### `placeholders`
+The default is `[hash].[ext]` where:
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |**`[ext]`**|`{String}`|`file.extname`|The extension of the resource|
 |**`[name]`**|`{String}`|`file.basename`|The basename of the resource|
 |**`[path]`**|`{String}`|`file.dirname`|The path of the resource relative to the `context`|
-|**`[hash]`**|`{String}`|`md5`|The hash of the content, hashes below for more info|
+|**`[hash]`**|`{String}`|`md5`|The hash of the content, see below for more info|
 
-### `hashes`
+#### [hash]
 
-`[<hashType>:hash:<digestType>:<length>]` optionally you can configure
+The format is: `[<hashType>:hash:<digestType>:<length>]` where:
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
@@ -104,9 +99,19 @@ By default, it will transform the following extensions: `.gif, .jpeg, .jpg, .png
 |**`digestType`**|`{String}`|`base64`|`hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`|
 |**`length`**|`{Number}`|`128`|The length in chars|
 
+For example: `[md5:hash:base58:8]` or `[hash:base36]`.
+
+### extensions
+
+List of extension file-loader should look for in imports. All other imports are ignored.
+
+## Contributing
+
+Yes, please!
+
 ## License
 
-`babel-plugin-file-loader` is [MIT licensed](./LICENSE)
+[MIT](./LICENSE)
 
 [npm-badge]: https://img.shields.io/npm/v/babel-plugin-file-loader.svg?style=flat-square
 [npm-link]: https://www.npmjs.com/package/babel-plugin-file-loader
