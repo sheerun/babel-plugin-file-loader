@@ -207,6 +207,20 @@ describe('index', function () {
     )
   })
 
+  it('should replace require statements even without assignment', function () {
+    const result = transformCode(getFixtures('require-no-var.js'), {}).code
+    expect(result).to.equal(
+      `'/public/64eababb117f90535085779cc0325003.svg';`
+    )
+  })
+
+  it('should replace require statements in react components', function () {
+    const result = transformCode(getFixtures('require-react.js'), {}).code
+    expect(result).to.equal(
+      `const React = require(\'react\');\n\nexport default class extends React.Component {\n  render() {\n    return React.createElement("img", { src: "/public/64eababb117f90535085779cc0325003.svg" });\n  }\n}`
+    )
+  })
+
   it('should do nothing when imports have no extensions', function () {
     const result = transformCode(getFixtures('import-no-ext.js')).code
     expect(result).to.equal(`import test from 'something';`)
