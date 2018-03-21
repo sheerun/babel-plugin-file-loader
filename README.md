@@ -31,8 +31,7 @@ This is equivalent to following default configuration:
         "name": "[hash].[ext]",
         "extensions": ["png", "jpg", "jpeg", "gif", "svg"],
         "publicPath": "/public",
-        "outputPath": "/public",
-        "context": ""
+        "outputPath": "/public"
       }
     ]
   ]
@@ -61,6 +60,8 @@ Puts `0dcbbaa7013869e351f.png` and `8d3fe267fe578005541.svg` in the `/public` an
 const img = "/public/0dcbbaa7013869e351f.png"
 const img2 = "/public/8d3fe267fe578005541.svg"
 ```
+
+For real-life example go to [examples](https://github.com/sheerun/babel-plugin-file-loader/tree/master/examples).
 
 ## Options
 
@@ -104,6 +105,10 @@ For example: `[md5:hash:base58:8]` or `[hash:base36]`.
 ### extensions
 
 List of extension file-loader should look for in imports. All other imports are ignored.
+
+### context
+
+Path to directory relative to `.babelrc` where application source resides. By default `""`, but can be e.g. `"/src"`.
 
 ## Contributing
 
