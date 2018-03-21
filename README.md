@@ -31,7 +31,8 @@ This is equivalent to following default configuration:
         "name": "[hash].[ext]",
         "extensions": ["png", "jpg", "jpeg", "gif", "svg"],
         "publicPath": "/public",
-        "outputPath": "/public"
+        "outputPath": "/public",
+        "context": ""
       }
     ]
   ]
