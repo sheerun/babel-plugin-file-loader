@@ -107,8 +107,13 @@ export default (rootPath, filePath, opts) => {
     (_, hashType, digestType, maxLength) =>
       hash(filePath, hashType, digestType, parseInt(maxLength, 10))
   )
-
-  fs.copySync(filePath, path.join(rootPath, outputPath, url.split('?')[0]))
+  
+  if (typeof outputPath === 'string') {
+    outputPath = [outputPath];
+  }
+  
+  outputPath.forEach(p => fs.copySync(filePath, path.join(rootPath, p, url.split('?')[0])));
+  
 
   return publicPath + '/' + url
 }
