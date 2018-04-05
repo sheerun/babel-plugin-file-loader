@@ -276,4 +276,18 @@ describe('index', function () {
       fs.existsSync(path.resolve(__dirname, './public/test/assets/file.png'))
     ).to.equal(true)
   })
+
+  it('outputs file in outputPath, multiple outputs', function () {
+    const result = transformCode(getFixtures('import-image.js'), {
+      outputPath: ['./test/public/1', './test/public/2'],
+      name: '[name].[ext]',
+    }).code
+    expect(
+      fs.existsSync(path.resolve(__dirname, './public/1/file.png'))
+    ).to.equal(true)
+    expect(
+      fs.existsSync(path.resolve(__dirname, './public/2/file.png'))
+    ).to.equal(true)
+  })
+
 })
