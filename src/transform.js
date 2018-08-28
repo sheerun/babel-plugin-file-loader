@@ -108,7 +108,9 @@ export default (rootPath, filePath, opts) => {
       hash(filePath, hashType, digestType, parseInt(maxLength, 10))
   )
 
-  fs.copySync(filePath, path.join(rootPath, outputPath, url.split('?')[0]))
+  if (outputPath !== null) {
+    fs.copySync(filePath, path.join(rootPath, outputPath, url.split('?')[0]))
+  }
 
   return publicPath + '/' + url
 }

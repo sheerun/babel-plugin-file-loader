@@ -70,7 +70,7 @@ For real-life example go to [examples](https://github.com/sheerun/babel-plugin-f
 
 Tells where to put static files. By default it's `"/public"`.
 
-This path is relative to the root of project.
+This path is relative to the root of project. Setting value `null` prevents the plugin to copy the file.
 
 ### publicPath
 

@@ -245,6 +245,15 @@ describe('index', function () {
     ).to.equal(true)
   })
 
+  it('doesnt output file when outputPath is null', function () {
+    transformCode(getFixtures('import-image.js'), { outputPath: null })
+    expect(
+      fs.existsSync(
+        path.resolve(__dirname, './public')
+      )
+    ).to.equal(false)
+  })
+
   it('outputs file in outputPath, nested', function () {
     const result = transformCode(getFixtures('import-image.js'), {
       name: '/foo/bar/[hash].[ext]'
