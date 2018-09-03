@@ -32,7 +32,8 @@ This is equivalent to following default configuration:
         "extensions": ["png", "jpg", "jpeg", "gif", "svg"],
         "publicPath": "/public",
         "outputPath": "/public",
-        "context": ""
+        "context": "",
+        "limit": 0
       }
     ]
   ]
@@ -110,6 +111,12 @@ List of extension file-loader should look for in imports. All other imports are 
 ### context
 
 Path to directory relative to `.babelrc` where application source resides. By default `""`, but can be e.g. `"/src"`.
+
+### limit
+
+Value in byte to determine if the content is base64 inlined. In that case, the file is not copy to `outputPath`. It replicates [url-loader](https://github.com/webpack-contrib/url-loader) webpack loader behaviour.
+
+Default is 0 which means nothing is inlined.
 
 ## Contributing
 

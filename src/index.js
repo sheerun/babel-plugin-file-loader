@@ -6,7 +6,8 @@ export const defaultOptions = {
   outputPath: '/public',
   publicPath: '/public',
   context: '',
-  extensions: ['gif', 'jpeg', 'jpg', 'png', 'svg']
+  extensions: ['gif', 'jpeg', 'jpg', 'png', 'svg'],
+  limit: 0
 }
 
 const getVariableName = p => {

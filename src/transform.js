@@ -1,6 +1,7 @@
 import crypto from 'crypto'
 import fs from 'fs-extra'
 import path from 'path'
+import mime from 'mime'
 
 const baseEncodeTables = {
   26: 'abcdefghijklmnopqrstuvwxyz',
@@ -38,11 +39,10 @@ function encodeBufferToBase (buffer, base) {
   return output
 }
 
-function hash (filePath, hashName, digestType, maxLength) {
+function hash (contents, hashName, digestType, maxLength) {
   hashName = hashName || 'md5'
   maxLength = maxLength || 128
 
-  const contents = fs.readFileSync(filePath)
   const hasher = crypto.createHash(hashName).update(contents)
 
   if (
@@ -72,6 +72,7 @@ export default (rootPath, filePath, opts) => {
   let outputPath = opts.outputPath
   let publicPath = opts.publicPath.replace(/\/$/, '')
   let context = opts.context[0] == '/' ? opts.context.substr(1) : opts.context
+  let limit = opts.limit
   let contextPath = path.resolve(rootPath, context)
 
   if (!fs.existsSync(filePath)) {
@@ -102,10 +103,17 @@ export default (rootPath, filePath, opts) => {
     .replace(/\[name\]/gi, () => basename)
     .replace(/\[path\]/gi, () => directory)
 
+  const contents = fs.readFileSync(filePath)
+  if (contents.length < limit) {
+    const src = Buffer.from(contents)
+    const mimetype = mime.getType(filePath) || ''
+    return `data:${mimetype};base64,${src.toString('base64')}`
+  }
+
   url = url.replace(
     /\[(?:([^:]+):)?hash(?::([a-z]+\d*))?(?::(\d+))?\]/gi,
     (_, hashType, digestType, maxLength) =>
-      hash(filePath, hashType, digestType, parseInt(maxLength, 10))
+      hash(contents, hashType, digestType, parseInt(maxLength, 10))
   )
 
   fs.copySync(filePath, path.join(rootPath, outputPath, url.split('?')[0]))
