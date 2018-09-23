@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-file-loader",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Like file-loader for webpack, but for Babel. Works with SSE apps.",
   "main": "lib/index.js",
   "scripts": {
