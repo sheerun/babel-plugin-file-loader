@@ -276,4 +276,59 @@ describe('index', function () {
       fs.existsSync(path.resolve(__dirname, './public/test/assets/file.png'))
     ).to.equal(true)
   })
+
+  it('inlines file when the length in lower then the limit', function () {
+    const result = transformCode(getFixtures('import-text.js'), {
+      extensions: ['txt'],
+      name: '[path][name].[ext]',
+      limit: 6
+    }).code
+    expect(result).to.equal(
+      `const test = 'data:text/plain;base64,MDAwMAo=';`
+    )
+  })
+
+  it('doesnt output the file when its inlined', function() {
+    transformCode(getFixtures('import-text.js'), {
+      extensions: ['txt'],
+      name: '[path][name].[ext]',
+      limit: 6
+    })
+    expect(
+      fs.existsSync(path.resolve(__dirname, './public'))
+    ).to.equal(false)
+  })
+
+  it('doesnt inline file when the lenght equals the limit', function () {
+    const result = transformCode(getFixtures('import-text.js'), {
+      extensions: ['txt'],
+      name: '[path][name].[ext]',
+      limit: 5
+    }).code
+    expect(result).to.equal(
+      `const test = '/public/test/assets/file.txt';`
+    )
+  })
+
+  it('ouputs the file when the lenght equals the limit', function () {
+    transformCode(getFixtures('import-text.js'), {
+      extensions: ['txt'],
+      name: '[path][name].[ext]',
+      limit: 5
+    })
+    expect(
+      fs.existsSync(path.resolve(__dirname, './public/test/assets/file.txt'))
+    ).to.equal(true)
+  })
+
+  it('inline file with an unknown type by not specifying mime type', function () {
+    const result = transformCode(getFixtures('import-unknown.js'), {
+      extensions: ['unknown'],
+      name: '[path][name].[ext]',
+      limit: 6
+    }).code
+    expect(result).to.equal(
+      `const test = 'data:;base64,MDAwMAo=';`
+    )
+  })
 })

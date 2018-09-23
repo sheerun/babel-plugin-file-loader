@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "big.js": "^5.0.3",
-    "fs-extra": "^4.0.2"
+    "fs-extra": "^4.0.2",
+    "mime": "^2.0.3"
   }
 }
