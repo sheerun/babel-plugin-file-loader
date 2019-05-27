@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: node:carbon
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          command: npm i
+          name: Installing dependencies
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          command: npm run clean
+          name: Cleaning
+      - run:
+          command: npm run test
+          name: Testing
+      - run:
+          command: npm run lint
+          name: ESLint
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test

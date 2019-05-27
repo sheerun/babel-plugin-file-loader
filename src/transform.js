@@ -1,7 +1,8 @@
-import crypto from 'crypto'
-import fs from 'fs-extra'
-import path from 'path'
-import mime from 'mime'
+import crypto from 'crypto';
+import fs from 'fs-extra';
+import path from 'path';
+import mime from 'mime';
+import Big from 'big.js';
 
 const baseEncodeTables = {
   26: 'abcdefghijklmnopqrstuvwxyz',
@@ -11,114 +12,117 @@ const baseEncodeTables = {
   52: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
   58: '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ', // no 0lIO
   62: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
-  64: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_'
-}
+  64: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_',
+};
 
-function encodeBufferToBase (buffer, base) {
-  const encodeTable = baseEncodeTables[base]
-  if (!encodeTable) throw new Error('Unknown encoding base' + base)
+function encodeBufferToBase(buffer, base) {
+  const encodeTable = baseEncodeTables[base];
+  if (!encodeTable) throw new Error(`Unknown encoding base${base}`);
 
-  const readLength = buffer.length
+  const readLength = buffer.length;
 
-  const Big = require('big.js')
-  Big.RM = Big.DP = 0
-  let b = new Big(0)
-  for (let i = readLength - 1; i >= 0; i--) {
-    b = b.times(256).plus(buffer[i])
+  Big.RM = 0;
+  Big.DP = 0;
+  let b = new Big(0);
+  for (let i = readLength - 1; i >= 0; i -= 1) {
+    b = b.times(256).plus(buffer[i]);
   }
 
-  let output = ''
+  let output = '';
   while (b.gt(0)) {
-    output = encodeTable[b.mod(base)] + output
-    b = b.div(base)
+    output = encodeTable[b.mod(base)] + output;
+    b = b.div(base);
   }
 
-  Big.DP = 20
-  Big.RM = 1
+  Big.DP = 20;
+  Big.RM = 1;
 
-  return output
+  return output;
 }
 
-function hash (contents, hashName, digestType, maxLength) {
-  hashName = hashName || 'md5'
-  maxLength = maxLength || 128
+function hash(contents, hashName, digestType, maxLength) {
+  const newHashName = hashName || 'md5';
+  const newMaxLength = maxLength || 128;
 
-  const hasher = crypto.createHash(hashName).update(contents)
+  const hasher = crypto.createHash(newHashName).update(contents);
 
   if (
-    digestType === 'base26' ||
-    digestType === 'base32' ||
-    digestType === 'base36' ||
-    digestType === 'base49' ||
-    digestType === 'base52' ||
-    digestType === 'base58' ||
-    digestType === 'base62' ||
-    digestType === 'base64'
+    digestType === 'base26'
+    || digestType === 'base32'
+    || digestType === 'base36'
+    || digestType === 'base49'
+    || digestType === 'base52'
+    || digestType === 'base58'
+    || digestType === 'base62'
+    || digestType === 'base64'
   ) {
     return encodeBufferToBase(hasher.digest(), digestType.substr(4)).substr(
       0,
-      maxLength
-    )
-  } else {
-    return hasher.digest(digestType || 'hex').substr(0, maxLength)
+      newMaxLength,
+    );
   }
+  return hasher.digest(digestType || 'hex').substr(0, newMaxLength);
 }
 
 export default (rootPath, filePath, opts) => {
-  let url = opts.name
-  let ext = 'bin'
-  let basename = 'file'
-  let directory = ''
-  let outputPath = opts.outputPath
-  let publicPath = opts.publicPath.replace(/\/$/, '')
-  let context = opts.context[0] == '/' ? opts.context.substr(1) : opts.context
-  let limit = opts.limit
-  let contextPath = path.resolve(rootPath, context)
+  let url = opts.name;
+  let ext = 'bin';
+  let basename = 'file';
+  let directory = '';
+  const { outputPath } = opts;
+  const publicPath = opts.publicPath.replace(/\/$/, '');
+  const context = opts.context[0] === '/' ? opts.context.substr(1) : opts.context;
+  const { limit } = opts;
+  const contextPath = path.resolve(rootPath, context);
 
   if (!fs.existsSync(filePath)) {
-    throw new Error('File does not exist')
+    throw new Error('File does not exist');
   }
 
-  const parsed = path.parse(filePath)
+  const parsed = path.parse(filePath);
 
   if (parsed.ext) {
-    ext = parsed.ext.substr(1)
+    ext = parsed.ext.substr(1);
   }
 
-  let basePath
+  let basePath;
 
   if (parsed.dir) {
-    basename = parsed.name
-    basePath = parsed.dir + path.sep
+    basename = parsed.name;
+    basePath = parsed.dir + path.sep;
   }
 
   directory = path
-    .relative(contextPath, basePath + '_')
+    .relative(contextPath, `${basePath}_`)
     .replace(/\\/g, '/')
-    .replace(/\.\.(\/)?/g, '_$1')
-  directory = directory.substr(0, directory.length - 1)
+    .replace(/\.\.(\/)?/g, '_$1');
+  directory = directory.substr(0, directory.length - 1);
 
   url = url
     .replace(/\[ext\]/gi, () => ext)
     .replace(/\[name\]/gi, () => basename)
-    .replace(/\[path\]/gi, () => directory)
+    .replace(/\[path\]/gi, () => directory);
 
-  const contents = fs.readFileSync(filePath)
+  const contents = fs.readFileSync(filePath);
   if (contents.length < limit) {
-    const src = Buffer.from(contents)
-    const mimetype = mime.getType(filePath) || ''
-    return `data:${mimetype};base64,${src.toString('base64')}`
+    const src = Buffer.from(contents);
+    const mimetype = mime.getType(filePath) || '';
+    return `data:${mimetype};base64,${src.toString('base64')}`;
   }
 
   url = url.replace(
     /\[(?:([^:]+):)?hash(?::([a-z]+\d*))?(?::(\d+))?\]/gi,
-    (_, hashType, digestType, maxLength) =>
-      hash(contents, hashType, digestType, parseInt(maxLength, 10))
-  )
+    (_, hashType, digestType, maxLength) => hash(
+      contents,
+      hashType,
+      digestType,
+      parseInt(maxLength, 10),
+    ),
+  );
 
   if (outputPath !== null) {
-    fs.copySync(filePath, path.join(rootPath, outputPath, url.split('?')[0]))
+    fs.copySync(filePath, path.join(rootPath, outputPath, url.split('?')[0]));
   }
 
-  return publicPath + '/' + url
-}
+  return `${publicPath}/${url}`;
+};

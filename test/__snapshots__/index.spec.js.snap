@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports['index doesnt inline file when the length equals the limit 1'] = '"const test = \\"/public/test/assets/file.txt\\";"';
+
+exports['index handles base26 digest 1'] = '"const test = \\"/public/ccjesbcwzsppzgsqtbnioeblcexw.png\\";"';
+
+exports['index handles base32 digest 1'] = '"const test = \\"/public/8vrapkyzxf5ryqy5jmrctwr2ww.png\\";"';
+
+exports['index handles base36 digest 1'] = '"const test = \\"/public/ewi6kgnxju4v6e6xs91ffh3mk.png\\";"';
+
+exports['index handles base49 digest 1'] = '"const test = \\"/public/wUByBoCTfZTTYAcdFceBFjM.png\\";"';
+
+exports['index handles base52 digest 1'] = '"const test = \\"/public/fVWKlApuFbbEMdlLegCqBlW.png\\";"';
+
+exports['index handles base58 digest 1'] = '"const test = \\"/public/x5UajugYgSHCpqHbQXrw1d.png\\";"';
+
+exports['index handles base62 digest 1'] = '"const test = \\"/public/7F0gARBRl8UjBzQkyqrDyY.png\\";"';
+
+exports['index handles base64 digest 1'] = '"const test = \\"/public/3XKCILvWUB_mYicXHPOUus.png\\";"';
+
+exports['index handles custom context 1'] = '"const test = \\"/public/assets/file.png\\";"';
+
+exports['index handles custom context v2 1'] = '"const test = \\"/public/file.png\\";"';
+
+exports['index handles custom import path 1'] = '"const test = \\"/static/9c87cbf3ba33126ffd25ae7f2f6bbafb.png\\";"';
+
+exports['index handles custom import path with trailing slash 1'] = '"const test = \\"/static/9c87cbf3ba33126ffd25ae7f2f6bbafb.png\\";"';
+
+exports['index handles custom name 1'] = '"const test = \\"/public/test/assets/file.png\\";"';
+
+exports['index handles full url as publicPath as query param 1'] = '"const test = \\"https://cdn.example.com/project/9c87cbf3ba33126ffd25ae7f2f6bbafb.png\\";"';
+
+exports['index handles hash as query param 1'] = '"const test = \\"/public/test/assets/file.png?9c87cbf3\\";"';
+
+exports['index handles hex digest 1'] = '"const test = \\"/public/9c87cbf3ba33126ffd25ae7f2f6bbafb.png\\";"';
+
+exports['index handles name with custom hash length 1'] = '"const test = \\"/public/9c87cbf3.png\\";"';
+
+exports['index handles sha1 hash 1'] = '"const test = \\"/public/f824ad7c5f655c81c88d3fe267fe5780055bced5.png\\";"';
+
+exports['index handles sha256 hash 1'] = '"const test = \\"/public/77c741ac0a9070da1f3c85468cfd7a11532987ad1e9a04631d724629d33c31bb.png\\";"';
+
+exports['index handles sha512 hash 1'] = '"const test = \\"/public/a72ac1286999e22d029054119627d677d6ad971132d81926c32284eb379c7f16094d1a0c2f7a281521ecbf6dbd03201b00c5120f985f531d0067b917b4f50709.png\\";"';
+
+exports['index inline file with an unknown type by not specifying mime type 1'] = '"const test = \\"data:;base64,MDAwMAo=\\";"';
+
+exports['index inlines file when the length in lower then the limit 1'] = '"const test = \\"data:text/plain;base64,MDAwMAo=\\";"';
+
+exports['index replaces import statements with uri 1'] = '"const test = \\"/public/9c87cbf3ba33126ffd25ae7f2f6bbafb.png\\";"';
+
+exports['index should do nothing when imports have no extensions 1'] = '"import test from \'something\';"';
+
+exports['index should do nothing when not a require assignment 1'] = '"const test = \'something\';"';
+
+exports['index should do nothing when require have no extensions 1'] = '"const test = require(\'something\');"';
+
+exports['index should replace require statements even without assignment 1'] = '"\\"/public/64eababb117f90535085779cc0325003.svg\\";"';
+
+exports['index should replace require statements in react components 1'] = `
+"const React = require('react');
+
+export default class extends React.Component {
+  render() {
+    return React.createElement(\\"img\\", {
+      src: \\"/public/64eababb117f90535085779cc0325003.svg\\"
+    });
+  }
+
+}"
+`;
+
+exports['index should replace require statements with uri 1'] = '"const test = \\"/public/64eababb117f90535085779cc0325003.svg\\";"';
