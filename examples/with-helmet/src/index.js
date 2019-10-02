@@ -1,5 +1,6 @@
 const React = require('react')
 const Helmet = require('react-helmet').default
+const Component = require('./component')
 
 class Application extends React.Component {
   render () {
@@ -16,6 +17,7 @@ class Application extends React.Component {
         </Helmet>
         <div style={{ margin: '200px auto', textAlign: 'center' }}>
           <img src={require('./assets/file.png')} />
+          <Component />
         </div>
       </div>
     )

@@ -2,8 +2,8 @@
   "presets": ["@babel/preset-react"],
   "plugins": [
     ["file-loader", {
-      "extensions": ["ico", "png"],
-      "publicPath": "/static",
+      "extensions": ["png", "jpg", "jpeg", "gif", "svg"],
+      "publicPath": "/dist",
       "outputPath": "/dist/static",
       "context": "/src"
     }]
