@@ -17,7 +17,9 @@
     "isomorphic"
   ],
   "main": "src/index.js",
-  "files": "src",
+  "files": [
+    "src"
+  ],
   "scripts": {
     "test": "modern test",
     "lint": "modern lint",
@@ -28,11 +30,11 @@
     "@babel/core": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "modern-node": "^2.5.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^3.0.0"
   },
   "dependencies": {
-    "big.js": "^5.0.3",
-    "fs-extra": "^4.0.2",
-    "mime": "^2.0.3"
+    "big.js": "^5.2.2",
+    "fs-extra": "^8.1.0",
+    "mime": "^2.4.4"
   }
 }
