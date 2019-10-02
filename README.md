@@ -1,15 +1,17 @@
-# babel-plugin-file-loader [![CircleCI](https://circleci.com/gh/sheerun/babel-plugin-file-loader/tree/master.svg?style=svg)](https://circleci.com/gh/sheerun/babel-plugin-file-loader/tree/master) [![npm][npm-badge]][npm-link]
+# babel-plugin-file-loader [![CI](https://img.shields.io/travis/sheerun/babel-plugin-file-loader/master.svg)](https://travis-ci.org/sheerun/babel-plugin-file-loader) [![Modern Node](https://img.shields.io/badge/modern-node-9BB48F.svg)](https://github.com/sheerun/modern-node)
 
 Works the same as Webpack's [file-loader](https://github.com/webpack-contrib/file-loader/), but on server side. With 95% test coverage!
 
 ## Installation
 
 ```
-npm install babel-plugin-file-loader --save
+yarn add babel-plugin-file-loader
 ```
 
+Or if you like npm:
+
 ```
-yarn add babel-plugin-file-loader
+npm install babel-plugin-file-loader --save
 ```
 
 Then put following "file-loader" as plugin in .babelrc:
@@ -47,7 +49,7 @@ More or less as follows:
 1. Processes only `import` and `require` that reference files ending with one of `"extensions"`
 2. Calculates actual `$name` of resource by substituting placeholders in `"name"`
 3. Copies resource into `$ROOT/$outputPath/$name` where `$ROOT` is `.babelrc` location.
-3. Replaces `import` and `require` in code with `"$publicPath/$name"` string
+4. Replaces `import` and `require` in code with `"$publicPath/$name"` string
 
 ## Example usage
 
@@ -87,20 +89,20 @@ const img = "http://cdn.example.com/foobar/0dcbbaa7013869e351f.png"
 
 The default is `[hash].[ext]` where:
 
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|**`[ext]`**|`{String}`|`file.extname`|The extension of the resource|
-|**`[name]`**|`{String}`|`file.basename`|The basename of the resource|
-|**`[path]`**|`{String}`|`file.dirname`|The path of the resource relative to the `context`|
-|**`[hash]`**|`{String}`|`md5`|The hash of the content, see below for more info|
+|     Name     |    Type    |     Default     | Description                                        |
+| :----------: | :--------: | :-------------: | :------------------------------------------------- |
+| **`[ext]`**  | `{String}` | `file.extname`  | The extension of the resource                      |
+| **`[name]`** | `{String}` | `file.basename` | The basename of the resource                       |
+| **`[path]`** | `{String}` | `file.dirname`  | The path of the resource relative to the `context` |
+| **`[hash]`** | `{String}` |      `md5`      | The hash of the content, see below for more info   |
 
 The full format `[hash]` is: `[<hashType>:hash:<digestType>:<length>]`, where:
 
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|**`hashType`**|`{String}`|`md5`|`sha1`, `md5`, `sha256`, `sha512`|
-|**`digestType`**|`{String}`|`base64`|`hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64`|
-|**`length`**|`{Number}`|`128`|The length in chars|
+|       Name       |    Type    | Default  | Description                                                                           |
+| :--------------: | :--------: | :------: | :------------------------------------------------------------------------------------ |
+|  **`hashType`**  | `{String}` |  `md5`   | `sha1`, `md5`, `sha256`, `sha512`                                                     |
+| **`digestType`** | `{String}` | `base64` | `hex`, `base26`, `base32`, `base36`, `base49`, `base52`, `base58`, `base62`, `base64` |
+|   **`length`**   | `{Number}` |  `128`   | The length in chars                                                                   |
 
 For example: `[md5:hash:base58:8]` or `[hash:base36]`.
 
@@ -124,7 +126,4 @@ Yes, please!
 
 ## License
 
-[MIT](./LICENSE)
-
-[npm-badge]: https://img.shields.io/npm/v/babel-plugin-file-loader.svg?style=flat-square
-[npm-link]: https://www.npmjs.com/package/babel-plugin-file-loader
+MIT

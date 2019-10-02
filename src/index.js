@@ -1,7 +1,7 @@
-import { dirname, extname, resolve } from 'path'
-import transform from './transform'
+const { dirname, extname, resolve } = require('path')
+const transform = require('./transform')
 
-export const defaultOptions = {
+const defaultOptions = {
   name: '[hash].[ext]',
   outputPath: '/public',
   publicPath: '/public',
@@ -50,7 +50,7 @@ const applyTransform = (p, t, state, value, calleeName) => {
   }
 }
 
-export function transformImportsInline ({ types: t }) {
+function transformImportsInline ({ types: t }) {
   return {
     visitor: {
       ImportDeclaration (p, state) {
@@ -73,4 +73,5 @@ export function transformImportsInline ({ types: t }) {
   }
 }
 
-export default transformImportsInline
+module.exports = transformImportsInline
+module.exports.transformImportsInline = transformImportsInline

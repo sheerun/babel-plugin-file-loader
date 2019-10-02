@@ -1,7 +1,7 @@
-import crypto from 'crypto'
-import fs from 'fs-extra'
-import path from 'path'
-import mime from 'mime'
+const crypto = require('crypto')
+const fs = require('fs-extra')
+const path = require('path')
+const mime = require('mime')
 
 const baseEncodeTables = {
   26: 'abcdefghijklmnopqrstuvwxyz',
@@ -64,16 +64,17 @@ function hash (contents, hashName, digestType, maxLength) {
   }
 }
 
-export default (rootPath, filePath, opts) => {
+function transform (rootPath, filePath, opts) {
   let url = opts.name
   let ext = 'bin'
   let basename = 'file'
   let directory = ''
-  let outputPath = opts.outputPath
-  let publicPath = opts.publicPath.replace(/\/$/, '')
-  let context = opts.context[0] == '/' ? opts.context.substr(1) : opts.context
-  let limit = opts.limit
-  let contextPath = path.resolve(rootPath, context)
+  const outputPath = opts.outputPath
+  const publicPath = opts.publicPath.replace(/\/$/, '')
+  const context =
+    opts.context[0] === '/' ? opts.context.substr(1) : opts.context
+  const limit = opts.limit
+  const contextPath = path.resolve(rootPath, context)
 
   if (!fs.existsSync(filePath)) {
     throw new Error('File does not exist')
@@ -122,3 +123,5 @@ export default (rootPath, filePath, opts) => {
 
   return publicPath + '/' + url
 }
+
+module.exports = transform

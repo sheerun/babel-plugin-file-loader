@@ -1,9 +1,0 @@
-machine:
-  node:
-    version: "8"
-test:
-  pre:
-    - npm run clean
-  override:
-    - npm run test
-    - npm run lint

@@ -1,16 +1,16 @@
 const React = require('react')
-const Koa = require('koa');
-const Helmet = require('react-helmet').default;
-const ReactDOMServer = require('react-dom/server');
+const Koa = require('koa')
+const Helmet = require('react-helmet').default
+const ReactDOMServer = require('react-dom/server')
 const koaStatic = require('koa-static')
-const koa = new Koa();
-const App = require('./dist');
+const koa = new Koa()
+const App = require('./dist')
 
-koa.use(koaStatic('dist'));
+koa.use(koaStatic('dist'))
 
 koa.use(async ctx => {
-  const body = ReactDOMServer.renderToString(React.createElement(App));
-  const helmet = Helmet.renderStatic();
+  const body = ReactDOMServer.renderToString(React.createElement(App))
+  const helmet = Helmet.renderStatic()
 
   ctx.body = `<!doctype html>
 <html ${helmet.htmlAttributes.toString()}>
@@ -24,8 +24,8 @@ koa.use(async ctx => {
           ${body}
         </div>
     </body>
-</html>`;
-});
+</html>`
+})
 
-koa.listen(3000);
+koa.listen(3000)
 console.log('Listening on port 3000')
