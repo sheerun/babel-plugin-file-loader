@@ -70,7 +70,7 @@ For real-life example go to [examples](https://github.com/sheerun/babel-plugin-f
 
 ## Options
 
-### outputPath
+### rootPath 
 
 This is a relative or absolute path to use with `outputPath` to ensure files are copied to the correct location.
 
