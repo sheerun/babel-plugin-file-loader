@@ -32,6 +32,7 @@ This is equivalent to following default configuration:
       {
         "name": "[hash].[ext]",
         "extensions": ["png", "jpg", "jpeg", "gif", "svg"],
+        "rootPath": "/root/path/to/app",
         "publicPath": "/public",
         "outputPath": "/public",
         "context": "",
@@ -68,6 +69,10 @@ const img2 = "/public/8d3fe267fe578005541.svg"
 For real-life example go to [examples](https://github.com/sheerun/babel-plugin-file-loader/tree/master/examples).
 
 ## Options
+
+### outputPath
+
+This is a relative or absolute path to use with `outputPath` to ensure files are copied to the correct location.
 
 ### outputPath
 

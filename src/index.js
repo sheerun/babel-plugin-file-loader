@@ -22,7 +22,7 @@ const applyTransform = (p, t, state, value, calleeName) => {
 
   if (options.extensions && options.extensions.indexOf(ext.slice(1)) >= 0) {
     try {
-      const rootPath = state.file.opts.sourceRoot || process.cwd()
+      const rootPath = options.rootPath || state.file.opts.sourceRoot || process.cwd()
       const scriptDirectory = dirname(resolve(state.file.opts.filename))
       const filePath = resolve(scriptDirectory, value)
 
