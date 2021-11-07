@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`index doesnt inline file when the lenght equals the limit 1`] = `"const test = \\"/public/test/assets/file.txt\\";"`;
+exports[`index doesnt inline file when the length equals the limit 1`] = `"const test = \\"/public/test/assets/file.txt\\";"`;
 
 exports[`index handles base26 digest 1`] = `"const test = \\"/public/ccjesbcwzsppzgsqtbnioeblcexw.png\\";"`;
 
@@ -33,6 +33,8 @@ exports[`index handles full url as publicPath as query param 1`] = `"const test 
 exports[`index handles hash as query param 1`] = `"const test = \\"/public/test/assets/file.png?9c87cbf3\\";"`;
 
 exports[`index handles hex digest 1`] = `"const test = \\"/public/9c87cbf3ba33126ffd25ae7f2f6bbafb.png\\";"`;
+
+exports[`index handles multiple extensions 1`] = `"const test = \\"/static/934823cbc67ccf0d67aa2a2eeb798f12.module.less\\";"`;
 
 exports[`index handles name with custom hash length 1`] = `"const test = \\"/public/9c87cbf3.png\\";"`;
 

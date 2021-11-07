@@ -25,6 +25,14 @@ describe('index', function () {
     expect(result).toMatchSnapshot()
   })
 
+  it('handles multiple extensions', function () {
+    const result = transformCode(getFixtures('import-multiple.js'), {
+      publicPath: '/static',
+      extensions: ['module.less']
+    }).code
+    expect(result).toMatchSnapshot()
+  })
+
   it('handles custom import path with trailing slash', function () {
     const result = transformCode(getFixtures('import-image.js'), {
       publicPath: '/static/'
@@ -260,7 +268,7 @@ describe('index', function () {
     expect(fs.existsSync(path.resolve(__dirname, './public'))).toEqual(false)
   })
 
-  it('doesnt inline file when the lenght equals the limit', function () {
+  it('doesnt inline file when the length equals the limit', function () {
     const result = transformCode(getFixtures('import-text.js'), {
       extensions: ['txt'],
       name: '[path][name].[ext]',
@@ -269,7 +277,7 @@ describe('index', function () {
     expect(result).toMatchSnapshot()
   })
 
-  it('ouputs the file when the lenght equals the limit', function () {
+  it('ouputs the file when the length equals the limit', function () {
     transformCode(getFixtures('import-text.js'), {
       extensions: ['txt'],
       name: '[path][name].[ext]',
