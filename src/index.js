@@ -1,4 +1,4 @@
-const { dirname, extname, resolve } = require('path')
+const { dirname, resolve } = require('path')
 const transform = require('./transform')
 
 const defaultOptions = {
@@ -17,10 +17,11 @@ const getVariableName = p => {
 }
 
 const applyTransform = (p, t, state, value, calleeName) => {
-  const ext = extname(value)
   const options = Object.assign({}, defaultOptions, state.opts)
 
-  if (options.extensions && options.extensions.indexOf(ext.slice(1)) >= 0) {
+  const valueMatches = options.extensions.some(ext => value.endsWith(ext))
+
+  if (options.extensions && valueMatches) {
     try {
       const rootPath = state.file.opts.sourceRoot || process.cwd()
       const scriptDirectory = dirname(resolve(state.file.opts.filename))

@@ -82,9 +82,7 @@ function transform (rootPath, filePath, opts) {
 
   const parsed = path.parse(filePath)
 
-  if (parsed.ext) {
-    ext = parsed.ext.substr(1)
-  }
+  ext = parsed.base.slice(parsed.base.indexOf('.') + 1)
 
   let basePath
 
